@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html ng-app="toDo" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-controller="ListController as LC">
+  <div class="container">
+    <h1 >My To-Do List</h1>
+    <div class="row">
+      <!-- <h3>Add a new task</h3> -->
+      <form ng-submit="LC.addToDo()">
+        <div >
+          <label for="newTask">New task:</label>
+          <input ng-model="LC.item"  name="newTask" id="newTask" placeholder="enter a task" />
+          <input class='btn btn-primary' name='submit' type='submit' value='Add to list!' />
+        </div>
+      </form>
+      <div class='col-md-4'>
+        <h3>TO DO</h3>
+        <table class="table">
+          <tr ng-repeat=" task in LC.toDoArray">
+            <td>
+              <div>
+                <input ng-model="LC.doing" ng-click="LC.nowDoing(task)" id="{{task}}" class='btn btn-success' name='doing' type="button" value='Doing!' />
+              </div>
+            </td>
+            <td>
+              {{task}}
+            </td>
+          </tr>
+        </table>
+<!-- <pre>{{LC.toDoArray}}</pre> -->
+      </div>
+      <div class='col-md-4'>
+        <h3>DOING</h3>
+        <table class="table">
+          <tr ng-repeat=" active in LC.doingArray">
+            <td>
+              <div>
+                <input ng-model="LC.done" ng-click="LC.nowDone(active)" id="{{task}}" class='btn btn-warning' name='done' type="button" value='Done!' />
+              </div>
+            </td>
+            <td>
+              {{active}}
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      <div class='col-md-4'>
+        <h3>DONE</h3>
+
+        <table class="table">
+          <tr ng-repeat=" complete in LC.doneArray">
+            <td>
+              <div>
+                <input ng-model="LC.done" ng-click="LC.removeItem(complete)" class='btn btn-danger' name='delete' type="button" value='Delete!' />
+              </div>
+            </td>
+            <td>
+              {{complete}}
+            </td>
+          </tr>
+        </table>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!--Angular -->
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js'></script>
+  <!--my scripts -->
+  <script src='app.js'></script>
+</body>
+
+</html>
